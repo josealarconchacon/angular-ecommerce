@@ -9,6 +9,7 @@ import { Getresponse } from "../getresponse";
 })
 export class ProductService {
   // define a base url for the spring service
+  private baseServiceUrl = "";
 
   constructor(private httpClient: HttpClient) {}
 
@@ -16,7 +17,7 @@ export class ProductService {
   // map json data from spring data rest to a product array
   getProductList(): Observable<Product[]> {
     return this.httpClient
-      .get<Getresponse>(this.baseServiceUrl)
-      .pipe(map((response) => response._builtIn.products));
+      .get<any>(this.baseServiceUrl)
+      .pipe(map((data) => data._embedded.products));
   }
 }
